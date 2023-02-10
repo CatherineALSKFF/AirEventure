@@ -1,0 +1,19 @@
+<%layout('./layouts/boilerplate')%>
+
+<% for (let event of events){ %>
+    <div class="card" style="width: 70%; margin: 3%; ">
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= event.title%>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                <%= event.description%>
+            </h6>
+            <p class="card-text">
+                <%= event.content%>
+            </p>
+            <a href="/events/<%= event._id%>" class="btn btn-dark">View Event :)</a>
+           
+        </div>
+    </div>
+    <%}%>

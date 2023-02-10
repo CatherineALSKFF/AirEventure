@@ -1,0 +1,33 @@
+<%layout('./layouts/boilerplate')%>
+<form action="/events" method="post" class="mb-3 validate-form" novalidate>
+  <div class="mb-3">
+    <label for="title" class="form-label">Enter the Title</label>
+    <input type="text" class="form-control" id="title" placeholder="Title" name="event[title]" required>
+    <div class="invalid-feedback">
+      You forgot to add a title :)
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" name="event[description]" placeholder="Description"
+      required>
+    <div class="invalid-feedback">
+      The description can give more context for your readers :)
+    </div>
+  </div>
+
+
+
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" name="event[content]" id="content" rows="3" placeholder="Content"
+      required></textarea>
+    <div class="invalid-feedback">
+      We care about showing your story :)
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-dark">Post</button>
+</form>
