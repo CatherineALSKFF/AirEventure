@@ -1,30 +1,34 @@
-const Event= require('../models/eventsDB');
+const Event = require('../models/eventsDB');
 
 
-module.exports.index= async (req, res) => {
+module.exports.index = async (req, res) => {
     const events = await Event.find({})
     res.render('events/index', { events })
 }
 
-module.exports.createEvent= async (req, res) => {
+module.exports.createEvent = async (req, res) => {
     console.log(req.body.event)
     const newPost = new Event(req.body.event);
-    newPost.author= req.user._id
+    newPost.author = req.user._id
+    const imgs = req.files.map(f => ({ filename: f.filename, url: f.path }))
+    newPost.image.push(...imgs);
+    console.log(newPost)
     await newPost.save();
     req.flash('success', 'Event Posted')
     res.redirect(`events/${newPost.id}`)
 }
 
-module.exports.renderNewForm=(req, res) => {
+module.exports.renderNewForm = (req, res) => {
     res.render('events/new')
 }
 
-module.exports.showEvent=async (req, res) => {
+module.exports.showEvent = async (req, res) => {
+
     const event = await Event.findById(req.params.id).populate({
-      path: 'comments',
-      populate: {path: 'author'}
+        path: 'comments',
+        populate: { path: 'author' }
     }).populate('author')
-    console.log(event.author)
+    console.log(event)
     if (event) {
         res.render('events/show', { event })
     } else {
@@ -33,21 +37,31 @@ module.exports.showEvent=async (req, res) => {
     }
 }
 
-module.exports.editEvent=async (req, res) => {
+module.exports.editEvent = async (req, res) => {
     const { id } = req.params;
     const event = await Event.findByIdAndUpdate(id, { ...req.body.event })
-    req.flash('success', 'Your Event is successfully edited')
-    res.redirect(`/events/${event._id}`)
+    const imgs = req.files.map(f => ({ filename: f.filename, url: f.path }))
+    event.image.push(...imgs);
+    await campgrounds.save();
+    // if(req.body.deleteImages){
+    //     for(let filename of req.body.deleteImages){
+    //         cloudinary.uploader.destroy(filename)
+    //     }
+    //     await event.updateOne({$pull: {image:{ filename:{$in: req.body.deleteImages}}}})
+    //     console.log(event)
+    // }
+    // req.flash('success', 'Your Event is successfully edited')
+    // res.redirect(`/events/${event._id}`)
 }
 
-module.exports.deleteEvent=async (req, res) => {
+module.exports.deleteEvent = async (req, res) => {
     const { id } = req.params;
     await Event.findByIdAndDelete(id);
     req.flash('success', 'Your event is successfully deleted');
     res.redirect('/events');
 }
 
-module.exports.renderEditForm=async (req, res) => {
+module.exports.renderEditForm = async (req, res) => {
     const { id } = req.params;
     const event = await Event.findById(id)
     if (!event) {

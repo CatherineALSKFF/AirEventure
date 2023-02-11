@@ -1,68 +1,115 @@
 <%layout('./layouts/boilerplate')%>
-
-<div class="row">
-  <div class="col-12 col-md-6">
-<!-- THE CONTENT -->
-
-<div class="card"  style="margin: 3%;">
-    <div class="card-body">
-      <h6 class="card-title text-muted">Submitted by <%= event.author.username %></h6>
-      <h5 class="card-title"> <%= event.title%></h5>
-      <h6 class="card-subtitle mb-2 text-muted"> <%= event.description%></h6>
-      <p class="card-text"> <%= event.content%></p>
-    
+  <link rel="stylesheet" type="text/css" href="/stylesheets/stars.css" />
+  
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <!-- THE CONTENT -->
+  
+      <div class="card" style="margin: 3%;">
+        <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
+  
+          <div class="carousel-inner">
+            <% event.image.forEach((img, i)=>{%>
+              <div class="carousel-item <%= i===0 ?'active': ''%>">
+                <img src="<%= img.url %>" crossorigin="anonymous" class="d-block w-100" alt="...">
+              </div>
+              <% }) %>
+                <% if(event.image.length>1){%>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                  <% } %>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title text-muted">Submitted by <%= event.author.username %>
+            </h6>
+            <h5 class="card-title">
+              <%= event.title%>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <%= event.description%>
+            </h6>
+            <p class="card-text">
+              <%= event.content%>
+            </p>
+  
+          </div>
+  
+  
+          <% if(currentUser && event.author.equals(currentUser._id)){ %>
+            <div class="card-body ">
+              <form action="/events/<%= event._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+              <a href="/events/<%= event._id%>/edit" class="btn btn-primary m-3">Edit</a>
+            </div>
+            <%}%>
+  
+        </div>
+  
+      </div>
+  
+      <div class="col-12 col-md-6">
+        <!-- THE REVIEWS -->
+  
+  
+  
+        <!-- COMMENTS INPUT -->
+        <div style="margin: 3%;">
+          <form action="/events/<%= event._id%>/comments" method="POST">
+  
+            <fieldset class="starability-basic">
+              <legend>Rating</legend>
+              <input type="radio" id="no-rate" class="input-no-rate" name="comment[vote]" value="0" checked
+                aria-label="No rating." />
+              <input type="radio" id="second-rate1" name="comment[vote]" value="1" />
+              <label for="second-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="second-rate2" name="comment[vote]" value="2" />
+              <label for="second-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="second-rate3" name="comment[vote]" value="3" />
+              <label for="second-rate3" title="Average">3 stars</label>
+              <input type="radio" id="second-rate4" name="comment[vote]" value="4" />
+              <label for="second-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="second-rate5" name="comment[vote]" value="5" />
+              <label for="second-rate5" title="Amazing">5 stars</label>
+            </fieldset>
+  
+            <div class="mb-3">
+              <label for="comment" class="form-label">Comment</label>
+              <textarea class="form-control" id="comment" name="comment[body]" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Comment</button>
+          </form>
+        </div>
+  
+        <!-- COMMENTS DISPLAY -->
+        <%for (let comment of event.comments){%>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h6 class="card-subtitle text-muted mb-2">By <%=comment.author.username%>
+              </h6>
+              <p class="starability-result" data-rating="<%=comment.vote%>">
+                Rated: <%=comment.vote%> stars
+              </p>
+              <p class="card-text">comment: <%=comment.body%>
+              </p>
+              <% if(currentUser && comment.author.equals(currentUser._id)){ %>
+                <form action="/events/<%= event._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                  <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+                <% }%>
+  
+            </div>
+          </div>
+          <% }%>
+  
+      </div>
+  
     </div>
-
-
-    <% if(currentUser && event.author.equals(currentUser._id)){ %>
-    <div class="card-body ">
-      <form action="/events/<%= event._id%>?_method=DELETE" method="POST">
-        <button class="btn btn-danger" >Delete</button>
-      </form>
-      <a href="/events/<%= event._id%>/edit" class="btn btn-primary m-3">Edit</a>
-    </div>
-    <%}%>
-
-  </div>
- 
-</div>
-
-<div class="col-12 col-md-6">
-<!-- THE REVIEWS -->
-
-
-
-<!-- COMMENTS INPUT -->
-<div style="margin: 3%;">
-<form action="/events/<%= event._id%>/comments" method="POST">
-<label for="vote" class="form-label">Vote</label>
-<input type="range" class="form-range" name="comment[vote]" min="0" max="5" id="vote">
-<div class="mb-3">
-    <label for="comment" class="form-label">Comment</label>
-    <textarea class="form-control" id="comment" name="comment[body]" rows="3"></textarea>
-  </div>
-<button type="submit" class="btn btn-success">Comment</button>
-</form>
-</div>
-
-<!-- COMMENTS DISPLAY -->
-<%for (let comment of event.comments){%>
-<div class="card mb-3">
-<div class="card-body">
-  <h6 class="card-subtitle text-muted mb-2">By <%=comment.author.username%> </h6>
-  <p class="card-text">comment: <%=comment.vote%> </p>
-      <p class="card-text">comment: <%=comment.body%> </p>
-     
-      <%  if(currentUser && comment.author.equals(currentUser._id)){ %>
-      <form action="/events/<%= event._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-        <button class="btn btn-danger btn-sm">Delete</button>
-      </form> 
-      <% }%>
-
-    </div>
-</div>
-<% }%>
-
-</div>
-
-</div>
