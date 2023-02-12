@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config()
+}
 // REQUIRING
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -25,10 +28,8 @@ const ObjectId = Schema.ObjectId;
 
 // PLAN 
 // 1. SERVER IMG UPLOADS WITH Cloudinary
-// 3. FIX EDIT
 // 2. ADDING A MAP WITH MAPBOX
 // 3. ADDING CLUSTER MAP
-
 
 
 
@@ -96,19 +97,7 @@ app.get('/renew', async (req, res) => {
         const event = new Event({
             title: `${events[i].title}`,
             description: `${events[i].description}`,
-            content: `${events[i].content}`,
-            author: "63e7784c9e0fba5455e1850f",
-            image: [
-                {
-                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676125217/Eventures/foyuul0nff3ocabjwx8q.jpg',
-                  filename: 'Eventures/foyuul0nff3ocabjwx8q',
-                },
-                {
-                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676125218/Eventures/hlqujiozg2ua4ii2skai.jpg',
-                  filename: 'Eventures/hlqujiozg2ua4ii2skai',
-                }
-              ]
-            
+            content: `${events[i].content}`
         });
         await event.save();
     };

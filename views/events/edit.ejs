@@ -2,7 +2,7 @@
 
 
 
-<form action="/events/<%= event._id%>?_method=PUT" method="post" novalidate enctype="multipart/form-data" class="mb-3">
+<form action="/events/<%= event._id%>?_method=PUT" method="post" class="mb-3">
     <div class="mb-3" >
         <label for="title" class="form-label">Enter the Title</label>
         <input type="text" class="form-control" id="title" placeholder="Title" name="event[title]" value="<%= event.title%>">
@@ -19,22 +19,6 @@
         <label for="content" class="form-label">Content</label>
         <textarea class="form-control" name="event[content]" id="content" rows="3" placeholder="Content" ><%= event.content%></textarea>
       </div> 
-      
-  <div class="mb-3">
-    <label for="image" class="form-label">Add a Images</label>
-    <input class="form-control" type="file" name="image" id="image" multiple>
-  </div>
-
-
-  <% event.image.forEach((img, i)=>{%>
-    <img src="<%= img.thumbnail %>" alt="" class='img-thumbnail'>
-    <div class="form-check inline">
-        <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%=img.filename%>" id="image-<%=i%>">
-        <label class="form-check-label" for="image-<%=i%>">
-          Delete
-        </label>
-      </div>
-<%})%>
     
       <button type="submit" class="btn btn-dark">Edit</button>
     </form>
