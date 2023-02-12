@@ -7,10 +7,13 @@ module.exports.index= async (req, res) => {
 }
 
 module.exports.createEvent= async (req, res) => {
-    console.log(req.body.event)
+    
     const newPost = new Event(req.body.event);
     newPost.author= req.user._id
+    newPost.author = req.user._id;
+    newPost.image= req.files.map(f=> ({filename: f.filename, url: f.path}));
     await newPost.save();
+    console.log(newPost)
     req.flash('success', 'Event Posted')
     res.redirect(`events/${newPost.id}`)
 }
@@ -36,6 +39,10 @@ module.exports.showEvent=async (req, res) => {
 module.exports.editEvent=async (req, res) => {
     const { id } = req.params;
     const event = await Event.findByIdAndUpdate(id, { ...req.body.event })
+    const imgs= req.files.map(f=> ({filename: f.filename, url: f.path}))
+    event.image.push(...imgs );
+    await event.save();
+    console.log(event)
     req.flash('success', 'Your Event is successfully edited')
     res.redirect(`/events/${event._id}`)
 }

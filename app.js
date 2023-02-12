@@ -1,6 +1,7 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
+const dotenv= require('dotenv')
 // REQUIRING
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -95,9 +96,19 @@ app.get('/renew', async (req, res) => {
     await Event.deleteMany({});
     for (let i = 0; i < events.length; i++) {
         const event = new Event({
+            author:"63e7784c9e0fba5455e1850f",
             title: `${events[i].title}`,
             description: `${events[i].description}`,
-            content: `${events[i].content}`
+            content: `${events[i].content}`,
+            image: [
+                {
+                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187633/Eventures/srdhsoy1cczq750jftw4.jpg',
+                  filename: 'Eventures/srdhsoy1cczq750jftw4'
+                },
+                {
+                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187634/Eventures/uvqhritwdb1xs8sfji51.jpg',
+                  filename: 'Eventures/uvqhritwdb1xs8sfji51'
+                }]
         });
         await event.save();
     };

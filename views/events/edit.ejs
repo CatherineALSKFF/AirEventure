@@ -2,7 +2,7 @@
 
 
 
-<form action="/events/<%= event._id%>?_method=PUT" method="post" class="mb-3">
+<form action="/events/<%= event._id%>?_method=PUT" enctype="multipart/form-data" method="post" class="mb-3">
     <div class="mb-3" >
         <label for="title" class="form-label">Enter the Title</label>
         <input type="text" class="form-control" id="title" placeholder="Title" name="event[title]" value="<%= event.title%>">
@@ -19,6 +19,11 @@
         <label for="content" class="form-label">Content</label>
         <textarea class="form-control" name="event[content]" id="content" rows="3" placeholder="Content" ><%= event.content%></textarea>
       </div> 
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Add a Images</label>
+        <input class="form-control" type="file" name="image" id="image" multiple>
+      </div>
     
       <button type="submit" class="btn btn-dark">Edit</button>
     </form>

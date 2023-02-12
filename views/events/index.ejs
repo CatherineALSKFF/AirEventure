@@ -1,19 +1,24 @@
 <%layout('./layouts/boilerplate')%>
 
 <% for (let event of events){ %>
-    <div class="card" style="width: 70%; margin: 3%; ">
-        <div class="card-body">
-            <h5 class="card-title">
-                <%= event.title%>
-            </h5>
-            <h6 class="card-subtitle mb-2 text-muted">
-                <%= event.description%>
-            </h6>
-            <p class="card-text">
-                <%= event.content%>
-            </p>
-            <a href="/events/<%= event._id%>" class="btn btn-dark">View Event :)</a>
-           
+   
+    <div class="card mb-3"  >
+        <div class="row">
+         
+         <div class="col-md-8">
+           <div class="card-body">
+             <h5 class="card-title">
+               <%= event.title %>
+               
+             </h5>
+             <p class="card-text"><%= event.description %></p>
+             <p class="text-muted"><%= event.location %></p>
+             <a href="/events/<%= event._id %>" class="btn  btn-primary">View <%= event.title %></a>
+           </div>
+         </div>
         </div>
-    </div>
+       </div>
+
     <%}%>
+
+  
