@@ -6,6 +6,7 @@ module.exports.eventSchema=  Joi.object({
     event: Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
+        location:Joi.string().required(),
         content: Joi.string().required()
     }).required()
 });

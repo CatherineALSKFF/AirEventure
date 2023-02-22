@@ -1,7 +1,11 @@
 <%layout('./layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
 
 <div class="row">
   <div class="col-md-6">
+
+ 
 <!-- THE CONTENT -->
 
 <div class="card"  style="margin: 3%;">
@@ -31,7 +35,8 @@
     <div class="card-body">
       <h6 class="card-title text-muted">Submitted by <%= event.author.username %></h6>
       <h5 class="card-title"> <%= event.title%></h5>
-      <h6 class="card-subtitle mb-2 text-muted"> <%= event.description%></h6>
+      <h6 class=" mb-2 text-muted"> <%= event.location%></h6>
+      <h6 class="card-subtitle mb-2 "> <%= event.description%></h6>
       <p class="card-text"> <%= event.content%></p>
     
     </div>
@@ -50,7 +55,13 @@
 </div>
 </div>
 
+
 <div class="col-md-6">
+
+        <!-- MAP -->
+    <div id='map' style='width: 400px; height: 300px;'></div>   
+
+
 <!-- THE REVIEWS -->
 
 
@@ -58,8 +69,29 @@
 <!-- COMMENTS INPUT -->
 <div style="margin: 3%;">
 <form action="/events/<%= event._id%>/comments" method="POST">
-<label for="vote" class="form-label">Vote</label>
-<input type="range" class="form-range" name="comment[vote]" min="0" max="5" id="vote">
+<!-- <label for="vote" class="form-label">Vote</label>
+<input type="range" class="form-range" name="comment[vote]" min="0" max="5" id="vote"> -->
+
+
+<h2>Leave a Review</h2>
+
+
+<fieldset class="starability-basic">
+  <legend>First vote:</legend>
+  <input type="radio" id="no-rate" class="input-no-rate" name="comment[vote]" value="1" checked
+    aria-label="No vote." />
+  <input type="radio" id="first-rate1" name="comment[vote]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="comment[vote]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="comment[vote]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="comment[vote]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="comment[vote]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+
 <div class="mb-3">
     <label for="comment" class="form-label">Comment</label>
     <textarea class="form-control" id="comment" name="comment[body]" rows="3"></textarea>
@@ -73,7 +105,9 @@
 <div class="card mb-3">
 <div class="card-body">
   <h6 class="card-subtitle text-muted mb-2">By <%=comment.author.username%> </h6>
-  <p class="card-text">comment: <%=comment.vote%> </p>
+  <p class="starability-result" data-rating="<%=comment.vote%>">
+    <%=comment.vote%> stars
+  </p>
       <p class="card-text">comment: <%=comment.body%> </p>
      
       <%  if(currentUser && comment.author.equals(currentUser._id)){ %>
@@ -90,3 +124,10 @@
 
 </div>
 </div>
+
+
+<script>
+  const mapToken = '<%- process.env.MAPBOX_TOKEN %>'
+  const events = <%-JSON.stringify(event) %>
+</script>
+<script src="/javascripts/showPageMap.js"></script>

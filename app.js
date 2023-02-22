@@ -12,6 +12,7 @@ const flash = require('connect-flash')
 const mongoose = require('mongoose');
 const Event = require('./models/eventsDB');
 const events = require('./seeds/eventsSeeds');
+const locations= require('./seeds/locations')
 const ExpressError = require('./utils/expressError');
 const methodOverride = require('method-override');
 const passport = require('passport');
@@ -94,12 +95,15 @@ app.use('/', usersRoutes)
 // TO RENEW THE DB
 app.get('/renew', async (req, res) => {
     await Event.deleteMany({});
-    for (let i = 0; i < events.length; i++) {
+    for (let i = 0; i < locations.length; i++) {
+        const price = Math.floor(Math.random() * 30) + 10;
+
         const event = new Event({
             author:"63e7784c9e0fba5455e1850f",
-            title: `${events[i].title}`,
-            description: `${events[i].description}`,
-            content: `${events[i].content}`,
+            title: `${locations[i].title}`,
+            description: `${locations[i].description}`,
+            content: `${locations[i].content}`,
+            location:`${locations[i].location}`,
             image: [
                 {
                   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187633/Eventures/srdhsoy1cczq750jftw4.jpg',
@@ -108,7 +112,12 @@ app.get('/renew', async (req, res) => {
                 {
                   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187634/Eventures/uvqhritwdb1xs8sfji51.jpg',
                   filename: 'Eventures/uvqhritwdb1xs8sfji51'
-                }]
+                }],
+                price,
+                geometry:{
+                    type:'Point',
+                    coordinates: [ locations[i].longitude,locations[i].latitude ]
+                  }
         });
         await event.save();
     };

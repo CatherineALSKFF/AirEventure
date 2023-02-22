@@ -1,5 +1,8 @@
 const Event= require('../models/eventsDB');
-
+const mbxGeocoding=  require( '@mapbox/mapbox-sdk/services/geocoding')
+const mapBoxToken= process.env.MAPBOX_TOKEN;
+const geocoder= mbxGeocoding({accessToken: mapBoxToken})
+const { cloudinary } = require('../cloudinary');
 
 module.exports.index= async (req, res) => {
     const events = await Event.find({})
@@ -7,10 +10,15 @@ module.exports.index= async (req, res) => {
 }
 
 module.exports.createEvent= async (req, res) => {
-    
+   
+   
     const newPost = new Event(req.body.event);
+    const geoData= await geocoder.forwardGeocode({
+        query: req.body.event.location,
+        limit: 1
+      }).send();
+    newPost.geometry= geoData.body.features[0].geometry;
     newPost.author= req.user._id
-    newPost.author = req.user._id;
     newPost.image= req.files.map(f=> ({filename: f.filename, url: f.path}));
     await newPost.save();
     console.log(newPost)
@@ -27,7 +35,7 @@ module.exports.showEvent=async (req, res) => {
       path: 'comments',
       populate: {path: 'author'}
     }).populate('author')
-    console.log(event.author)
+    console.log(event)
     if (event) {
         res.render('events/show', { event })
     } else {
