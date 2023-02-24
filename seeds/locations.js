@@ -5,7 +5,22 @@ module.exports = [
     location: "Amsterdam, Netherlands",
     content: "Enjoy live performances from a variety of musical genres, including rock, pop, hip hop, and electronic dance music. Food and drink vendors will be on-site, and there will be a variety of activities for all ages. Don't miss this chance to experience the best music and fun under the summer sun!",
     latitude: 52.3702,
-    longitude: 4.8952
+    longitude: 4.8952,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230677/Eventures/gm70rhqrazhcjatm9fgq.jpg',
+        filename: 'Eventures/gm70rhqrazhcjatm9fgq'
+      }
+      // ,
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230679/Eventures/eeoz7rbjqssla1irf0dq.jpg',
+      //   filename: 'Eventures/eeoz7rbjqssla1irf0dq'
+      // },
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230679/Eventures/dqar5dwat307011lcyoo.jpg',
+      //   filename: 'Eventures/dqar5dwat307011lcyoo'
+      // }
+    ]
   },
   {
     title: "Food & Wine Celebration",
@@ -13,7 +28,22 @@ module.exports = [
     location: "Paris, France",
     content: "Sample dishes from renowned chefs, sip on exceptional wines, and discover new spirits at this exciting culinary event. Meet the winemakers and distillers, attend cooking demonstrations, and indulge in your passions for food and drink. Treat yourself to a memorable experience in the culinary capital of the world!",
     latitude: 48.8566,
-    longitude: 2.3522
+    longitude: 2.3522,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230964/Eventures/nbcjyci1w4h7rtqqgomg.jpg',
+        filename: 'Eventures/nbcjyci1w4h7rtqqgomg'
+      }
+      // ,
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230964/Eventures/pifsx3q2goc8s5tnx4kb.jpg',
+      //   filename: 'Eventures/pifsx3q2goc8s5tnx4kb'
+      // },
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230967/Eventures/vkyzmlk08hx6k3alujlo.jpg',
+      //   filename: 'Eventures/vkyzmlk08hx6k3alujlo'
+      // }
+    ]
   },
   {
     title: "Art & Design Exhibition",
@@ -21,7 +51,18 @@ module.exports = [
     location: "Berlin, Germany",
     content: "Explore a diverse range of art and design styles, from traditional paintings and sculptures to cutting-edge digital media. Watch live demonstrations from talented artists, attend insightful talks and discussions, and immerse yourself in the world of art and design. Don't miss this chance to be inspired and amazed!",
     latitude: 52.5200,
-    longitude: 13.4050
+    longitude: 13.4050,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231331/Eventures/di7mtdrcqn5zcmtovdbo.jpg',
+        filename: 'Eventures/di7mtdrcqn5zcmtovdbo',
+      }
+      // ,
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231333/Eventures/dn2m3kiegigqp4riprj6.jpg',
+      //   filename: 'Eventures/dn2m3kiegigqp4riprj6',
+      // }
+    ]
   },
   {
     title: "International Film Festival",
@@ -29,7 +70,14 @@ module.exports = [
     location: "Rome, Italy",
     content: "Discover the latest in world cinema, from major Hollywood productions to independent films from around the globe. Meet filmmakers and actors, attend Q&A sessions, and enjoy a rich program of screenings, events, and parties. Immerse yourself in the world of film and experience the magic of cinema!",
     latitude: 41.9028,
-    longitude: 12.4964
+    longitude: 12.4964,
+    image: [
+     
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231333/Eventures/dn2m3kiegigqp4riprj6.jpg',
+        filename: 'Eventures/dn2m3kiegigqp4riprj6'
+      }
+    ]
   },
   {
     title: "Theatre Festival",
@@ -37,7 +85,13 @@ module.exports = [
     location: "London, UK",
     content: "See a range of exciting productions, from new plays to classic works. Meet the cast and crew, attend Q&A sessions, and be inspired by the creativity and talent on display. Enjoy a dynamic program of performances, workshops, and events, and experience the excitement of the theatre!",
     latitude: 51.5074,
-    longitude: -0.1278
+    longitude: -0.1278,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231331/Eventures/di7mtdrcqn5zcmtovdbo.jpg',
+        filename: 'Eventures/di7mtdrcqn5zcmtovdbo'
+      }
+    ]
   },
   {
     title: "Jazz Festival",
@@ -45,7 +99,13 @@ module.exports = [
     location: "New York, USA",
     content: "Hear live performances from world-renowned jazz artists, attend workshops and masterclasses, and immerse yourself in the rich history and culture of jazz. With a lineup of talented musicians, and a range of events for all ages, this is the perfect opportunity to experience the magic of jazz!",
     latitude: 40.7128,
-    longitude: -74.0060
+    longitude: -74.0060,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232191/Eventures/rolefb5kce7dc4v76wgt.webp',
+        filename: 'Eventures/rolefb5kce7dc4v76wgt',
+      }
+    ]
   }
   ,
   {
@@ -54,7 +114,13 @@ module.exports = [
     location: "Toronto, Canada",
     content: "Discover the latest in world cinema, from major Hollywood productions to independent films from around the globe. Meet filmmakers and actors, attend Q&A sessions, and enjoy a rich program of screenings, events, and parties. Immerse yourself in the world of film and experience the magic of cinema!",
     latitude: 43.6532,
-    longitude: -79.3832
+    longitude: -79.3832,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231331/Eventures/di7mtdrcqn5zcmtovdbo.jpg',
+        filename: 'Eventures/di7mtdrcqn5zcmtovdbo'
+      }
+    ]
   },
   {
     title: "Book Fair",
@@ -62,7 +128,13 @@ module.exports = [
     location: "Tokyo, Japan",
     content: "Discover the latest in the world of literature and meet your favorite authors at this exciting book fair. Attend readings and panel discussions, and find new books to add to your collection. With a range of events for all ages, this is the perfect opportunity to celebrate the power of books!",
     latitude: 35.6762,
-    longitude: 139.6503
+    longitude: 139.6503,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231333/Eventures/dn2m3kiegigqp4riprj6.jpg',
+        filename: 'Eventures/dn2m3kiegigqp4riprj6'
+            }
+    ]
   },
   {
     title: "Fashion Week",
@@ -70,7 +142,13 @@ module.exports = [
     location: "Milan, Italy",
     content: "See the latest collections from top designers, attend runway shows and presentations, and immerse yourself in the world of fashion. With a rich program of events, parties, and exclusive experiences, this is the perfect opportunity to discover the latest trends and meet the top players in the fashion industry!",
     latitude: 45.4642,
-    longitude: 9.1900
+    longitude: 9.1900,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232261/Eventures/gcrn2l5pvmfhmvsydjho.jpg',
+        filename: 'Eventures/gcrn2l5pvmfhmvsydjho',
+      }
+    ]
   },
   {
     title: "Science Fair",
@@ -78,7 +156,13 @@ module.exports = [
     location: "San Francisco, USA",
     content: "Explore the latest discoveries in science and technology, from cutting-edge research to new products and technologies. Meet the scientists and innovators behind the breakthroughs, attend talks and presentations, and experience the excitement of the world of science. With a range of activities for all ages, this is the perfect opportunity to discover the wonders of science!",
     latitude: 37.7749,
-    longitude: -122.4194
+    longitude: -122.4194,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232387/Eventures/cr8nnhm8vwgb33qhzjmr.jpg',
+        filename: 'Eventures/cr8nnhm8vwgb33qhzjmr',
+      }
+    ]
   },
   {
     title: "Comedy Festival",
@@ -86,7 +170,18 @@ module.exports = [
     location: "Edinburgh, UK",
     content: "Laugh out loud with the best stand-up comedians from around the world at this exciting comedy festival. With a diverse lineup of comedians and a range of venues, this is the perfect opportunity to experience the fun and humor of the world of comedy!",
     latitude: 55.9533,
-    longitude: -3.1883
+    longitude: -3.1883,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232849/Eventures/tdmiz4krgpmyhtyja0j0.jpg',
+        filename: 'Eventures/tdmiz4krgpmyhtyja0j0'
+      }
+      // ,
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232849/Eventures/vso7agulicnb8jenvlrw.jpg',
+      //   filename: 'Eventures/vso7agulicnb8jenvlrw'
+      // }
+    ]
   },
   {
     title: "Tech Conference",
@@ -94,5 +189,16 @@ module.exports = [
     location: "Bangalore, India",
     content: "Discover the latest in technology and entrepreneurship at this exciting tech conference. Attend talks and presentations by industry leaders, network with other entrepreneurs and investors, and explore the latest in tech products and services. With a range of activities for all levels of experience, this is the perfect opportunity to take your tech skills to the next level!",
     latitude: 12.9716,
-    longitude: 77.5946
+    longitude: 77.5946,
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232687/Eventures/rnenl2tagty1td2ysmra.jpg',
+        filename: 'Eventures/rnenl2tagty1td2ysmra'
+      }
+      // ,
+      // {
+      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232688/Eventures/zocflgkmohli0j25zmpe.jpg',
+      //   filename: 'Eventures/zocflgkmohli0j25zmpe'
+      // }
+    ]
   }]

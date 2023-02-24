@@ -97,7 +97,11 @@ app.get('/renew', async (req, res) => {
     await Event.deleteMany({});
     for (let i = 0; i < locations.length; i++) {
         const price = Math.floor(Math.random() * 30) + 10;
-
+        const images= locations[i].image;
+        for (let j = 0; j < images.length; j++) {
+            const imageUrl = images[j].url;
+            const imageFilename = images[j].filename;
+        
         const event = new Event({
             author:"63e7784c9e0fba5455e1850f",
             title: `${locations[i].title}`,
@@ -106,21 +110,25 @@ app.get('/renew', async (req, res) => {
             location:`${locations[i].location}`,
             image: [
                 {
-                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187633/Eventures/srdhsoy1cczq750jftw4.jpg',
-                  filename: 'Eventures/srdhsoy1cczq750jftw4'
-                },
-                {
-                  url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1676187634/Eventures/uvqhritwdb1xs8sfji51.jpg',
-                  filename: 'Eventures/uvqhritwdb1xs8sfji51'
-                }],
+                    
+                  url: `${imageUrl}`,
+                  filename:`${imageFilename}`
+                }
+               
+              ],
                 price,
                 geometry:{
                     type:'Point',
                     coordinates: [ locations[i].longitude,locations[i].latitude ]
                   }
         });
+   
+   
+
+   
         await event.save();
-    };
+    
+} };
     const news = await Event.find({});
     res.send(news)
 })
