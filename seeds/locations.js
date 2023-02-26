@@ -30,20 +30,11 @@ module.exports = [
     latitude: 48.8566,
     longitude: 2.3522,
     image: [
-      {
-        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230964/Eventures/nbcjyci1w4h7rtqqgomg.jpg',
-        filename: 'Eventures/nbcjyci1w4h7rtqqgomg'
-      }
-      // ,
-      // {
-      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230964/Eventures/pifsx3q2goc8s5tnx4kb.jpg',
-      //   filename: 'Eventures/pifsx3q2goc8s5tnx4kb'
-      // },
-      // {
-      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677230967/Eventures/vkyzmlk08hx6k3alujlo.jpg',
-      //   filename: 'Eventures/vkyzmlk08hx6k3alujlo'
-      // }
-    ]
+        {
+          url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677273409/Eventures/htjmnuydy7t4swlmj7qq.jpg',
+          filename: 'Eventures/htjmnuydy7t4swlmj7qq',
+        }
+      ]
   },
   {
     title: "Art & Design Exhibition",
@@ -57,11 +48,6 @@ module.exports = [
         url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231331/Eventures/di7mtdrcqn5zcmtovdbo.jpg',
         filename: 'Eventures/di7mtdrcqn5zcmtovdbo',
       }
-      // ,
-      // {
-      //   url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677231333/Eventures/dn2m3kiegigqp4riprj6.jpg',
-      //   filename: 'Eventures/dn2m3kiegigqp4riprj6',
-      // }
     ]
   },
   {
@@ -145,8 +131,8 @@ module.exports = [
     longitude: 9.1900,
     image: [
       {
-        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677232261/Eventures/gcrn2l5pvmfhmvsydjho.jpg',
-        filename: 'Eventures/gcrn2l5pvmfhmvsydjho',
+        url: 'https://res.cloudinary.com/dcvwaxbeh/image/upload/v1677273934/Eventures/qpmesilscexdddvl6g3w.jpg',
+        filename: 'Eventures/qpmesilscexdddvl6g3w',
       }
     ]
   },

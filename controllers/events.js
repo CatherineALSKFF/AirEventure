@@ -50,7 +50,13 @@ module.exports.editEvent=async (req, res) => {
     const imgs= req.files.map(f=> ({filename: f.filename, url: f.path}))
     event.image.push(...imgs );
     await event.save();
-    console.log(event)
+    if(req.body.deleteImages){
+        for(let filename of req.body.deleteImages){
+            cloudinary.uploader.destroy(filename)
+        }
+        await event.updateOne({$pull: {image:{ filename:{$in: req.body.deleteImages}}}})
+        console.log(event)
+    }
     req.flash('success', 'Your Event is successfully edited')
     res.redirect(`/events/${event._id}`)
 }

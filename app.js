@@ -22,8 +22,10 @@ const Schema = mongoose.Schema;
 const eventRoutes = require('./routes/events');
 const commentRoutes = require('./routes/comments');
 const usersRoutes= require('./routes/users')
+const {isEvAuthor}= require('./middleware')
 const ObjectId = Schema.ObjectId;
-
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet')
 
 
 
@@ -47,7 +49,7 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/the-controversies');
+mongoose.connect('mongodb://127.0.0.1:27017/eventures');
 
 const sessionConfig = {
     secret: 'stuff',
@@ -60,6 +62,56 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(
+    helmet()
+  );
+
+  const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [ 
+    "https://kit-free.fontawesome.com/" ,
+    "https://stackpath.bootstrapcdn.com/" ,
+    "https://api.mapbox.com/" ,
+    "https://api.tiles.mapbox.com/" ,
+    "https://fonts.googleapis.com/" ,
+    "https://use.fontawesome.com/" ,
+    "https://cdn.jsdelivr.net" ,
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+const fontSrcUrls = [  "https://fonts.gstatic.com/"];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                "https://res.cloudinary.com/dcvwaxbeh/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+                "https://images.unsplash.com/"
+            ],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+  );
+
+
 
 
 app.use(passport.initialize());
@@ -89,11 +141,11 @@ app.use((req, res, next) => {
 app.use('/events', eventRoutes);
 app.use('/', commentRoutes);
 app.use('/', usersRoutes)
-
+app.get('/',(req, res)=>{ res.render('home')})
 
 
 // TO RENEW THE DB
-app.get('/renew', async (req, res) => {
+app.get('/renew',  async (req, res) => {
     await Event.deleteMany({});
     for (let i = 0; i < locations.length; i++) {
         const price = Math.floor(Math.random() * 30) + 10;
@@ -103,7 +155,7 @@ app.get('/renew', async (req, res) => {
             const imageFilename = images[j].filename;
         
         const event = new Event({
-            author:"63e7784c9e0fba5455e1850f",
+            author:"63fa162de8cb707f52be8d72",
             title: `${locations[i].title}`,
             description: `${locations[i].description}`,
             content: `${locations[i].content}`,
@@ -122,12 +174,7 @@ app.get('/renew', async (req, res) => {
                     coordinates: [ locations[i].longitude,locations[i].latitude ]
                   }
         });
-   
-   
-
-   
         await event.save();
-    
 } };
     const news = await Event.find({});
     res.send(news)

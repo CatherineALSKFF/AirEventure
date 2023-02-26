@@ -57,3 +57,16 @@ module.exports.isAuthor= async(req,res,next)=>{
     }
   next();
   }
+
+
+  
+// module.exports.isEvAuthor= async(req,res,next)=>{
+//     const {id}=req.params;
+//     const event= await Event.findById(id);
+//     if (!event.author._id ==='63e7784c9e0fba5455e1850f'){
+//         req.flash('error', 'You do not have the permission to do that!');
+//         res.redirect(`/events`)
+//     }
+//   next();
+//   }
+  

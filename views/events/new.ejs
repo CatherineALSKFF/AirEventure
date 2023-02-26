@@ -1,5 +1,9 @@
 <%layout('./layouts/boilerplate')%>
-<form action="/events" method="post" class="mb-3 validate-form" enctype="multipart/form-data" novalidate>
+<div class=" m-3 justify-content-center align-items-center vh-100">
+  <div class=" new-form card p-5 mb-3 pt-1">
+    <!-- Content goes here -->
+ 
+<form action="/events" method="post" class="mb-3 p-3   validate-form" enctype="multipart/form-data" novalidate>
   <div class="mb-3">
     <label for="title" class="form-label">Enter the Title</label>
     <input type="text" class="form-control" id="title" placeholder="Title" name="event[title]" required>
@@ -44,3 +48,6 @@
 
   <button type="submit" class="btn btn-dark">Post</button>
 </form>
+
+</div>
+</div>

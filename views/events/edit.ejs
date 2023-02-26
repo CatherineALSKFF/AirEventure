@@ -1,11 +1,17 @@
 <%layout('./layouts/boilerplate')%>
-
+<div class=" m-3 justify-content-center align-items-center vh-100">
+  <div class=" new-form card p-5 mb-3 pt-1">
 
 
 <form action="/events/<%= event._id%>?_method=PUT" enctype="multipart/form-data" method="post" class="mb-3">
     <div class="mb-3" >
         <label for="title" class="form-label">Enter the Title</label>
         <input type="text" class="form-control" id="title" placeholder="Title" name="event[title]" value="<%= event.title%>">
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="Location"  name="event[location]" value="<%= event.location%>">
       </div>
     
     
@@ -24,6 +30,17 @@
         <label for="image" class="form-label">Add a Images</label>
         <input class="form-control" type="file" name="image" id="image" multiple>
       </div>
+
+      <% event.image.forEach((img, i)=>{%>       
+        <img src="<%= img.url %>" alt="" class='img-thumbnail'  crossorigin="anonymous"> -->
+         <div class="form-check inline">
+            <input class="form-check-input" type="checkbox" name="deleteImages[]" value="<%=img.filename%>" id="image-<%=i%>">
+            <label class="form-check-label" for="image-<%=i%>">
+              Delete
+            </label>
+          </div>
+    <%})%>
     
       <button type="submit" class="btn btn-dark">Edit</button>
     </form>
+  </div> </div>
