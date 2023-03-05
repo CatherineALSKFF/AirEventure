@@ -7,6 +7,7 @@ const { cloudinary } = require('../cloudinary');
 module.exports.index= async (req, res) => {
     const events = await Event.find({})
     res.render('events/index', { events })
+  
 }
 
 module.exports.createEvent= async (req, res) => {

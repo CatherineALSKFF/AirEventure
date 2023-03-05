@@ -1,6 +1,12 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
+
+
+
+
+
+
 const dotenv= require('dotenv')
 // REQUIRING
 const express = require('express');
@@ -22,11 +28,11 @@ const Schema = mongoose.Schema;
 const eventRoutes = require('./routes/events');
 const commentRoutes = require('./routes/comments');
 const usersRoutes= require('./routes/users')
-const {isEvAuthor}= require('./middleware')
-const ObjectId = Schema.ObjectId;
+// const {isEvAuthor}= require('./middleware')
+// const ObjectId = Schema.ObjectId;
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet')
-
+ const MongoStore = require('connect-mongo');
 
 
 
@@ -48,11 +54,40 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize({
+    replaceWith: '_',
+}));
+
+
+
+const dbUrl= process.env.DB_URL || 'mongodb://127.0.0.1:27017/eventures';
+
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/eventures');
+// 'mongodb://127.0.0.1:27017/eventures'
+mongoose.connect(dbUrl
+//     ,{
+//     useNewUrlParser:true,
+//     useCreateIndex:true,
+//     useUnifiedTopology:true,
+//     useFindAndModify:false
+
+// }
+);
+
+const store= MongoStore.create({
+     mongoUrl: dbUrl,
+     touchAfter: 24 * 3600 
+ })
+
+store.on('error', (e)=>{
+    console.log('session store error', e)
+})
+
+const secret= process.env.SECRET || 'donttellsecret'
 
 const sessionConfig = {
-    secret: 'stuff',
+  store: store,
+    secret,
     resave: false,
     cookie: {
         httpOnly: true,
@@ -155,7 +190,7 @@ app.get('/renew',  async (req, res) => {
             const imageFilename = images[j].filename;
         
         const event = new Event({
-            author:"63fa162de8cb707f52be8d72",
+            author:"63fb376b6f12543a2121812d",
             title: `${locations[i].title}`,
             description: `${locations[i].description}`,
             content: `${locations[i].content}`,
